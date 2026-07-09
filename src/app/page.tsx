@@ -151,6 +151,35 @@ export default function Home() {
             </div>
           </section>
         )}
+        
+        <section className={"bg-white p-6 shadow-sm border border-gray-200"}>
+          <h2 className={"text-xl font-semibold mb-4 text-gray-700"}>Published Briefs</h2>
+          {savedBriefs.length === 0 ? (
+            <p className="text-gray-500 text-sm">No saved briefs found.</p>
+          ) : (
+            <div className="space-y-4 divide-y divide-gray-700">
+              {savedBriefs.map((brief, index) => (
+                <div key={index} className="pt-4 first:pt-0 border-b last:border-0 pb-4">
+                  <h3 className={"text-xl font-semibold mb-4 text-gray-700"}>{brief.title}</h3>
+                  <p className={`$"block text-sm font-medium text-gray-600 font-semibold`}>Overview</p>
+                  <p className={`$"block text-sm font-medium text-gray-600 pl-6`}>{brief.overview}</p>
+                  <p className={`$"block text-sm font-medium text-gray-600 font-semibold`}>Skills developed</p>
+                  <ul className={`$"block text-sm font-medium text-gray-600 pl-6 list-disc space-y-2`}>
+                    {brief.skillsDeveloped.map((skill, index) => (
+                      <li key={index}>{skill}</li>
+                    ))}
+                  </ul>
+                  <p className={`$"block text-sm font-medium text-gray-600 font-semibold mt-3`}>Week-by-Week milestones</p>
+                  <ol className={`$"block text-sm font-medium text-gray-600 pl-6 list-disc space-y-2`}>
+                    {brief.weekByWeekPlan.map((week, index) => (
+                      <li key={index}>{week}</li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
       </div>
     </main>
   );
