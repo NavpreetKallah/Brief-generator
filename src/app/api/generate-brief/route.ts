@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Anthropic } from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import { validateBrief } from '@/app/utils/validateBrief';
 import fs from 'fs';
 import path from 'path';
 
-const anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
-    });
+const ai = new GoogleGenAI({});
+
+// const anthropic = new Anthropic({
+//       apiKey: process.env.ANTHROPIC_API_KEY,
+//     });
 
 export async function POST(request: Request) {
   try {
@@ -23,14 +26,29 @@ export async function POST(request: Request) {
     let prompt = fs.readFileSync(promptPath, 'utf8');
     prompt += userContent;
 
-    let response = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 1500,
-      system: prompt,
-      messages: [{ role: 'user', content: userContent }],
+    // Original Claude variation
+
+    // let response = await anthropic.messages.create({
+    //   model: 'claude-3-5-sonnet-20241022',
+    //   system: prompt,
+    //   messages: [{ role: 'user', content: userContent }],
+    // });
+
+    // const responseText = response.content[0].type === 'text' ? response.content[0].text : '';
+
+    // End of claude variation
+
+    // Gemini variation
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+      config: {
+        responseMimeType: 'application/json',
+      }
     });
 
-    const responseText = response.content[0].type === 'text' ? response.content[0].text : '';
+    const responseText = response.text;
+    // End of Gemini variation
 
     if (!responseText) {
       throw new Error("No response string received from the model");
