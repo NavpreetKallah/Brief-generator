@@ -9,3 +9,5 @@ You MUST respond with a single, valid JSON object matching the following structu
   "weekByWeekPlan": ["Week 1 objective", "Week 2 objective", ...],
   "skillsDeveloped": ["Skill 1", "Skill 2", ...]
 }
+
+CRITICAL RULE: The length of the "weekByWeekPlan" array MUST exactly match the number of weeks requested by the user.
