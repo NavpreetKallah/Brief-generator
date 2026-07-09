@@ -55,6 +55,20 @@ export default function Home() {
     }
   };
 
+  const handleUpdateWeek = (index: number, value: string) => {
+    if (!generatedBrief) return;
+    const updatedWeeks = [...generatedBrief.weekByWeekPlan];
+    updatedWeeks[index] = value;
+    setGeneratedBrief({ ...generatedBrief, weekByWeekPlan: updatedWeeks });
+  };
+
+  const handleSave = () => {
+    if (!generatedBrief) return;
+    const updatedList = [generatedBrief, ...savedBriefs];
+    setSavedBriefs(updatedList);
+    localStorage.setItem('briefs', JSON.stringify(updatedList));
+    setGeneratedBrief(null);
+  };
 
   return (
     <main className="min-h-screen bg-gray-50 text-gray-900 p-8">
@@ -100,6 +114,43 @@ export default function Home() {
           </form>
           {error && <p className="mt-4 text-sm text-red-600 font-medium">{error}</p>}
         </section>
+
+        {generatedBrief && (
+          <section className={"bg-white p-6 shadow-sm border border-gray-200"}>
+            <h2 className={"text-xl font-semibold mb-4 text-gray-700"}>Generated Brief</h2>
+              <div className="grid grid-cols-1 gap-4">
+              <div>
+                <label className={"block text-sm font-medium text-gray-600"}>Project Title</label>
+                <input type="text" value={generatedBrief.title} onChange={(e) => setGeneratedBrief({ ...generatedBrief, title: e.target.value })} className={"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none"} />
+              </div>
+
+              <div>
+                <label className={"block text-sm font-medium text-gray-600"}>Overview</label>
+                <textarea rows={2} value={generatedBrief.overview} onChange={(e) => setGeneratedBrief({ ...generatedBrief, overview: e.target.value })} className={"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none"} />
+              </div>
+
+              <div>
+                <label className={"block text-sm font-medium text-gray-600"}>Week-by-Week Milestones</label>
+                <div className="space-y-2">
+                  {generatedBrief.weekByWeekPlan.map((week, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <input type="text" value={week} onChange={(e) => handleUpdateWeek(idx, e.target.value)} className={"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none"} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className={"text-xl font-semibold mb-4 text-gray-700"}>Skills Candidate Will Develop</label>
+                <p className={"block text-sm font-medium text-gray-600"}>{generatedBrief.skillsDeveloped.join(', ')}</p>
+              </div>
+
+              <button onClick={handleSave} className={"w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4"}>
+                Save and Publish Brief
+              </button>
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );
