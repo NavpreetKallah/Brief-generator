@@ -3,6 +3,15 @@
 import { useState, useEffect } from 'react';
 import { Brief } from "@/app/types";
 
+const UI = {
+  defaultText:"block text-sm font-medium text-gray-600",
+  inputBox:"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none",
+  title:"text-xl font-semibold mb-4 text-gray-700",
+  button:"w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4",
+  list:"w-10 text-sm font-mono text-slate-500 text-right select-none",
+  box:"bg-white p-6 shadow-sm border border-gray-200",
+}
+
 export default function Home() {
   const [companyName, setCompanyName] = useState('');
   const [problemStatement, setProblemStatement] = useState('');
@@ -78,37 +87,37 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-gray-700">Brief Generator</h1>
         </div>
 
-        <section className="bg-white p-6 shadow-sm border border-gray-200">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700">Project Parameters</h2>
+        <section className={UI.box}>
+          <h2 className={UI.title}>Project Parameters</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Company Name</label>
-                <input required type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className="mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none" />
+                <label className={UI.defaultText}>Company Name</label>
+                <input required type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} className={UI.inputBox} />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-600">Duration (Weeks)</label>
-                  <input required type="number" min="1" max="12" value={durationInWeeks} onChange={(e) => setDurationInWeeks(Number(e.target.value))} className="mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none" />
+                  <label className={UI.defaultText}>Duration (Weeks)</label>
+                  <input required type="number" min="1" max="12" value={durationInWeeks} onChange={(e) => setDurationInWeeks(Number(e.target.value))} className={UI.inputBox} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-600">Hours / Week</label>
-                  <input required type="number" min="1" max="40" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(Number(e.target.value))} className="mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none" />
+                  <label className={UI.defaultText}>Hours / Week</label>
+                  <input required type="number" min="1" max="40" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(Number(e.target.value))} className={UI.inputBox} />
                 </div>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600">Problem Statement</label>
-              <textarea required rows={3} value={problemStatement} onChange={(e) => setProblemStatement(e.target.value)} className="mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none" />
+              <label className={UI.defaultText}>Problem Statement</label>
+              <textarea required rows={3} value={problemStatement} onChange={(e) => setProblemStatement(e.target.value)} className={UI.inputBox} />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600">Desired Outputs</label>
-              <textarea required rows={2} value={desiredOutputs} onChange={(e) => setDesiredOutputs(e.target.value)} className="mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none" />
+              <label className={UI.defaultText}>Desired Outputs</label>
+              <textarea required rows={2} value={desiredOutputs} onChange={(e) => setDesiredOutputs(e.target.value)} className={UI.inputBox} />
             </div>
 
-            <button type="submit" disabled={isLoading} className="w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4">
+            <button type="submit" disabled={isLoading} className={UI.button}>
               {isLoading ? 'Generating Structure...' : 'Generate Structured Brief'}
             </button>
           </form>
@@ -116,61 +125,61 @@ export default function Home() {
         </section>
 
         {generatedBrief && (
-          <section className={"bg-white p-6 shadow-sm border border-gray-200"}>
-            <h2 className={"text-xl font-semibold mb-4 text-gray-700"}>Generated Brief</h2>
+          <section className={UI.box}>
+            <h2 className={UI.title}>Generated Brief</h2>
               <div className="grid grid-cols-1 gap-4">
               <div>
-                <label className={"block text-sm font-medium text-gray-600"}>Project Title</label>
-                <input type="text" value={generatedBrief.title} onChange={(e) => setGeneratedBrief({ ...generatedBrief, title: e.target.value })} className={"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none"} />
+                <label className={UI.defaultText}>Project Title</label>
+                <input type="text" value={generatedBrief.title} onChange={(e) => setGeneratedBrief({ ...generatedBrief, title: e.target.value })} className={UI.inputBox} />
               </div>
 
               <div>
-                <label className={"block text-sm font-medium text-gray-600"}>Overview</label>
-                <textarea rows={2} value={generatedBrief.overview} onChange={(e) => setGeneratedBrief({ ...generatedBrief, overview: e.target.value })} className={"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none"} />
+                <label className={UI.defaultText}>Overview</label>
+                <textarea rows={2} value={generatedBrief.overview} onChange={(e) => setGeneratedBrief({ ...generatedBrief, overview: e.target.value })} className={UI.inputBox} />
               </div>
 
               <div>
-                <label className={"block text-sm font-medium text-gray-600"}>Week-by-Week Milestones</label>
+                <label className={UI.defaultText}>Week-by-Week Milestones</label>
                 <div className="space-y-2">
                   {generatedBrief.weekByWeekPlan.map((week, idx) => (
                     <div key={idx} className="flex items-center gap-2">
-                      <input type="text" value={week} onChange={(e) => handleUpdateWeek(idx, e.target.value)} className={"mt-1 block w-full p-2 border border-gray-400 focus:border-gray-700 focus:ring-gray-700 focus:outline-none transition-colors outline-none"} />
+                      <input type="text" value={week} onChange={(e) => handleUpdateWeek(idx, e.target.value)} className={UI.inputBox} />
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className={"text-xl font-semibold mb-4 text-gray-700"}>Skills Candidate Will Develop</label>
-                <p className={"block text-sm font-medium text-gray-600"}>{generatedBrief.skillsDeveloped.join(', ')}</p>
+                <label className={UI.title}>Skills Candidate Will Develop</label>
+                <p className={UI.defaultText}>{generatedBrief.skillsDeveloped.join(', ')}</p>
               </div>
 
-              <button onClick={handleSave} className={"w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4"}>
+              <button onClick={handleSave} className={UI.button}>
                 Save and Publish Brief
               </button>
             </div>
           </section>
         )}
         
-        <section className={"bg-white p-6 shadow-sm border border-gray-200"}>
-          <h2 className={"text-xl font-semibold mb-4 text-gray-700"}>Published Briefs</h2>
+        <section className={UI.box}>
+          <h2 className={UI.title}>Published Briefs</h2>
           {savedBriefs.length === 0 ? (
             <p className="text-gray-500 text-sm">No saved briefs found.</p>
           ) : (
             <div className="space-y-4 divide-y divide-gray-700">
               {savedBriefs.map((brief, index) => (
                 <div key={index} className="pt-4 first:pt-0 border-b last:border-0 pb-4">
-                  <h3 className={"text-xl font-semibold mb-4 text-gray-700"}>{brief.title}</h3>
-                  <p className={`$"block text-sm font-medium text-gray-600 font-semibold`}>Overview</p>
-                  <p className={`$"block text-sm font-medium text-gray-600 pl-6`}>{brief.overview}</p>
-                  <p className={`$"block text-sm font-medium text-gray-600 font-semibold`}>Skills developed</p>
-                  <ul className={`$"block text-sm font-medium text-gray-600 pl-6 list-disc space-y-2`}>
+                  <h3 className={UI.title}>{brief.title}</h3>
+                  <p className={`${UI.defaultText} font-semibold`}>Overview</p>
+                  <p className={`${UI.defaultText} pl-6`}>{brief.overview}</p>
+                  <p className={`${UI.defaultText} font-semibold`}>Skills developed</p>
+                  <ul className={`${UI.defaultText} pl-6 list-disc space-y-2`}>
                     {brief.skillsDeveloped.map((skill, index) => (
                       <li key={index}>{skill}</li>
                     ))}
                   </ul>
-                  <p className={`$"block text-sm font-medium text-gray-600 font-semibold mt-3`}>Week-by-Week milestones</p>
-                  <ol className={`$"block text-sm font-medium text-gray-600 pl-6 list-disc space-y-2`}>
+                  <p className={`${UI.defaultText} font-semibold mt-3`}>Week-by-Week milestones</p>
+                  <ol className={`${UI.defaultText} pl-6 list-disc space-y-2`}>
                     {brief.weekByWeekPlan.map((week, index) => (
                       <li key={index}>{week}</li>
                     ))}
