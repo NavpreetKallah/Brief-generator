@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Ventureship Technical Intern Take-Home
 
-## Getting Started
+**Ticket picked:** I picked Ticket 1 due to it containing aspects I have previously built, during my time at NSK Care Services a simple website form was sent to clients and this data was then stored in the database. I decided against Ticket 3 as I haven't built a weighted scoring/matching algorithm outside of coursework, and a 3-hour assessed project isn't the place to get that judgment right for the first time.
 
-First, run the development server:
+**Stack:** Next.js, TypeScript, Vitest.
+- Vitest for its lightweight speed
+- Next.js's App Router to keep the API key server-side.
+- Localstorage was used to store data.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**What I cut:**
+- No cloud migration beyond Vercel's default hosting. This was out of scope for a 
+  3-hour build and I would have moved to a managed Postgres instance if more time was given.
+- No additional guardrails on the brief-generation prompt beyond the verification schema. A user could steer the AI off-task. I 
+  judged that closing this properly was out of scope for the time budget.
+
+**AI provider note:** 
+After failing to get the starter credit working for myself I emailed the Ventureship team on Tuesday requesting an Anthropic API key 
+and followed up Thursday morning with no response. 
+Rather than wait on this, I built using Gemini and left the Claude 
+implementation commented out to show the integrations are quite similar.
+
+**How I used AI tools:**
+Used Claude for UI scaffolding, since the brief said a designer already 
+exists. Claude produced heavily duplicated components, which needed a 
+refactor regardless of AI use. When I raised this, Claude agreed and attempted 
+to fix it, but the result used far more className variants than the design 
+needed. I simplified these manually to get a consistent, streamlined UI.
+
+**Time spent**
+This was all tracked with Github commit history.
+- Planning with Claude: 5 min
+- Repo setup: 5 min
+- Deploying to Vercel: 10 min
+- Brief generation feature: 30 min
+- Claude/Gemini integration: 30 min
+- UI: 55 min
+- Video: 20 min
+- README: 15 min
+- **Total: 2 hour 50 minutes**
+
+**Running the tests**
+
+```
+npm test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Runs the Vitest suite, including the schema validation test for a malformed briefs. 
