@@ -1,4 +1,4 @@
-## Ventureship Technical Intern Take-Home
+## Technical Take-Home Challenge
 
 **Ticket picked:** I picked Ticket 1 due to it containing aspects I have previously built, during my time at NSK Care Services a simple website form was sent to clients and this data was then stored in the database. I decided against Ticket 3 as I haven't built a weighted scoring/matching algorithm outside of coursework, and a 3-hour assessed project isn't the place to get that judgment right for the first time.
 
