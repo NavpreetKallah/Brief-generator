@@ -24,7 +24,7 @@ This was all tracked with Github commit history.
 - Repo setup: 5 min
 - Deploying to Vercel: 10 min
 - Brief generation feature: 30 min
-- Claude/Gemini integration: 30 min
+- Claude/Gemini integration: 30 min (API Access fell through)
 - UI: 55 min
 - Video: 20 min
 - README: 15 min
