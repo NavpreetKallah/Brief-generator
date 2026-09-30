@@ -1,6 +1,4 @@
-## Technical Take-Home Challenge
-
-**Ticket picked:** I picked Ticket 1 due to it containing aspects I have previously built, during my time at NSK Care Services a simple website form was sent to clients and this data was then stored in the database. I decided against Ticket 3 as I haven't built a weighted scoring/matching algorithm outside of coursework, and a 3-hour assessed project isn't the place to get that judgment right for the first time.
+## Brief-generator
 
 **Stack:** Next.js, TypeScript, Vitest.
 - Vitest for its lightweight speed
@@ -12,12 +10,6 @@
   3-hour build and I would have moved to a managed Postgres instance if more time was given.
 - No additional guardrails on the brief-generation prompt beyond the verification schema. A user could steer the AI off-task. I 
   judged that closing this properly was out of scope for the time budget.
-
-**AI provider note:** 
-After failing to get the starter credit working for myself I emailed the Ventureship team on Tuesday requesting an Anthropic API key 
-and followed up Thursday morning with no response. 
-Rather than wait on this, I built using Gemini and left the Claude 
-implementation commented out to show the integrations are quite similar.
 
 **How I used AI tools:**
 Used Claude for UI scaffolding, since the brief said a designer already 
